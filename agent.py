@@ -21,6 +21,7 @@ import asyncio
 from pathlib import Path
 
 from colorama import Fore, Style, init
+from dotenv import load_dotenv
 
 from langchain_core.messages import AIMessage, ToolMessage
 from langchain_mcp_adapters.client import MultiServerMCPClient
@@ -44,6 +45,8 @@ def print_header(title: str, width: int = 60, color: str = Fore.CYAN):
 
 
 PROJECT_ROOT = Path(__file__).parent.resolve()
+load_dotenv(PROJECT_ROOT / ".env", override=False)
+
 NOTES_SERVER = str(PROJECT_ROOT / "mcp_servers" / "notes_server.py")
 CALC_SERVER  = str(PROJECT_ROOT / "mcp_servers" / "calculator_server.py")
 
@@ -320,8 +323,8 @@ async def run_single_query(query: str):
 
 if __name__ == "__main__":
     if not os.getenv("OPENAI_API_KEY"):
-        print(styled("Error: OPENAI_API_KEY environment variable not set.", Fore.RED, bold=True))
-        print("  Run: export OPENAI_API_KEY=your_key_here")
+        print(styled("Error: OPENAI_API_KEY is not set in .env or the environment.", Fore.RED, bold=True))
+        print(f"  Add OPENAI_API_KEY=your_key_here to {PROJECT_ROOT / '.env'}")
         sys.exit(1)
 
     if "--query" in sys.argv:

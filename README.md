@@ -85,6 +85,8 @@ pip install "langgraph>=1.0.0" "langchain-openai>=1.0.0" "langchain>=1.0.0" "lan
 ### Step 2: Configure Your API Key
 
 The project reads the key from a `.env` file or environment variable.
+The `.env` file is loaded from the project directory, even when launched from
+another directory. Existing environment variables take precedence.
 
 **Option A — .env file** (recommended):
 

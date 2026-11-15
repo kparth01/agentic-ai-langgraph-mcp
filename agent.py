@@ -47,8 +47,7 @@ PROJECT_ROOT = Path(__file__).parent.resolve()
 NOTES_SERVER = str(PROJECT_ROOT / "mcp_servers" / "notes_server.py")
 CALC_SERVER  = str(PROJECT_ROOT / "mcp_servers" / "calculator_server.py")
 
-LLM_MODEL       = os.getenv("LLM_MODEL", "gpt-4o-mini")
-LLM_TEMPERATURE = 0.7
+LLM_MODEL = os.getenv("LLM_MODEL", "gpt-5-mini")
 
 SYSTEM_PROMPT = """You are a helpful AI assistant with access to two sets of tools:
 
@@ -98,7 +97,7 @@ async def build_agent(client: MultiServerMCPClient, checkpointer=None):
     for tool in tools:
         print(f"  - {styled(tool.name)}: {tool.description[:60]}...")
 
-    model = ChatOpenAI(model=LLM_MODEL, temperature=LLM_TEMPERATURE)
+    model = ChatOpenAI(model=LLM_MODEL)
 
     def call_model(state: MessagesState):
         messages = [{"role": "system", "content": SYSTEM_PROMPT}] + state["messages"]

@@ -90,7 +90,7 @@ The project reads the key from a `.env` file or environment variable.
 
 ```
 OPENAI_API_KEY=sk-your-key-here
-LLM_MODEL=gpt-4o-mini
+LLM_MODEL=gpt-5-mini
 ```
 
 **Option B — Environment variable**:
